@@ -18,12 +18,19 @@ window.addEventListener('beforeinstallprompt', function (event) {
 
 let promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve('This is executed once the timer is done!');
+    // resolve('This is executed once the timer is done!');
+    reject({
+      code: 500,
+      message: 'An error ocurred!'
+    });
   }, 3000);
 });
 
+// Error with reject callback
 promise.then((text) => {
   console.log(text);
+}, (error) => {
+  console.log(error.code, error.message);
 });
 
 console.log('This is executed right after setTimeout()');
