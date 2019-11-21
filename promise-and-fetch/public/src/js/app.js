@@ -9,15 +9,21 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-window.addEventListener('beforeinstallprompt', function(event) {
+window.addEventListener('beforeinstallprompt', function (event) {
   console.log('beforeinstallprompt fired');
   event.preventDefault();
   deferredPrompt = event;
   return false;
 });
 
-setTimeout(function() {
-  console.log('This is executed once the timer is done!');
-}, 3000);
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('This is executed once the timer is done!');
+  }, 3000);
+});
+
+promise.then((text) => {
+  console.log(text);
+});
 
 console.log('This is executed right after setTimeout()');
