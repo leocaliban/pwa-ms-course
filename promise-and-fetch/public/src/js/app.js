@@ -27,9 +27,16 @@ let promise = new Promise((resolve, reject) => {
 });
 
 // Error with reject callback
+// promise.then((text) => {
+//   console.log(text);
+// }, (error) => {
+//   console.log(error.code, error.message);
+// });
+
+// Error with Catch (Recomended)
 promise.then((text) => {
   console.log(text);
-}, (error) => {
+}).catch((error) => { // Catch any errors in the 'then' chain
   console.log(error.code, error.message);
 });
 
