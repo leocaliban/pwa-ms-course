@@ -26,6 +26,19 @@ let promise = new Promise((resolve, reject) => {
   }, 3000);
 });
 
+
+fetch('https://httpbin.org/ip')
+  .then((response) => {
+    console.log(response);
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 // Error with reject callback
 // promise.then((text) => {
 //   console.log(text);
