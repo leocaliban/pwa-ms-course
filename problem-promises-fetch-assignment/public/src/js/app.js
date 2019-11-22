@@ -1,11 +1,59 @@
 
 var button = document.querySelector('#start-button');
 var output = document.querySelector('#output');
+var outputPost = document.querySelector('#output-post');
 
-button.addEventListener('click', function() {
+button.addEventListener('click', function () {
   // Create a new Promise here and use setTimeout inside the function you pass to the constructor
 
-  setTimeout(function() { // <- Store this INSIDE the Promise you created!
+  var promise = new Promise((resolve, reject) => {
+    setTimeout(function () {
+      resolve(
+        fetch('https://swapi.co/api/people/1')
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            return data.name;
+          }));
+    }, 3000);
+  });
+
+  var promisePost = new Promise((resolve, reject) => {
+    setTimeout(function () {
+      resolve(
+        fetch('https://httpbin.org/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            person: {
+              name: 'Jack',
+              age: 28
+            }
+          }),
+          mode: 'cors'
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            return data.json.person.name;
+          }));
+    }, 1000);
+  });
+
+  promise.then(function (data) {
+    output.innerHTML = data;
+  });
+
+  promisePost.then(function (data) {
+    outputPost.innerHTML = data;
+  });
+
+  setTimeout(function () { // <- Store this INSIDE the Promise you created!
     // Resolve the following URL: https://swapi.co/api/people/1
   }, 3000);
 
