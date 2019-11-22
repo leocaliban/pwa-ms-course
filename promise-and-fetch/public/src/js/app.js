@@ -47,7 +47,8 @@ fetch('https://httpbin.org/post', {
   },
   body: JSON.stringify({
     message: 'Does this work?'
-  })
+  }),
+  mode: 'cors'
 })
   .then((response) => {
     console.log(response);
