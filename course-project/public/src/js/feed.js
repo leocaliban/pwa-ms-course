@@ -42,6 +42,7 @@ function createCard() {
   cardTitle.style.backgroundImage = 'url("/src/images/sf-boat.jpg")';
   cardTitle.style.backgroundSize = 'cover';
   cardTitle.style.height = '180px';
+  cardTitle.style.color = '#fff';
   cardWrapper.appendChild(cardTitle);
   var cardTitleTextElement = document.createElement('h2');
   cardTitleTextElement.className = 'mdl-card__title-text';
@@ -57,9 +58,9 @@ function createCard() {
 }
 
 fetch('https://httpbin.org/get')
-  .then(function(res) {
+  .then(function (res) {
     return res.json();
   })
-  .then(function(data) {
+  .then(function (data) {
     createCard();
   });
