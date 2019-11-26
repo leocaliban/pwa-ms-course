@@ -10,6 +10,7 @@ self.addEventListener('install', function (event) {
                 cache.addAll([
                     '/',
                     '/index.html',
+                    '/offline.html',
                     '/src/js/app.js',
                     '/src/js/feed.js',
                     '/src/js/promise.js',
@@ -59,7 +60,10 @@ self.addEventListener('fetch', function (event) {
                                 });
                         })
                         .catch(function (error) {
-
+                            return caches.open(CACHE_STATIC_NAME)
+                                .then(function (cache) {
+                                    return cache.match('/offline.html');
+                                });
                         });
                 }
             })
